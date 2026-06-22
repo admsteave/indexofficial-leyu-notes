@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>九游 · 一个安静的起点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f9fc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.65;
+            color: #1b2f3c;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .page-wrap {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 40px 0 60px;
+            width: 100%;
+        }
+
+        /* 开场短句 — 稳而轻 */
+        .opening {
+            font-size: 1.3rem;
+            font-weight: 350;
+            letter-spacing: 0.02em;
+            color: #1f5f6e;
+            margin: 1.6rem 0 0.6rem 0;
+            padding-left: 2px;
+            border-left: 4px solid #3ca3b5;
+            padding-left: 16px;
+        }
+
+        .opening em {
+            font-style: normal;
+            background: linear-gradient(120deg, #d8f0f5 0%, #d8f0f5 40%, transparent 80%);
+            padding: 0 6px 0 2px;
+        }
+
+        /* 承接段落 */
+        .context {
+            margin: 1.8rem 0 2rem 0;
+            font-size: 1rem;
+            color: #2b414b;
+            max-width: 680px;
+        }
+
+        .context p {
+            margin-bottom: 1.2rem;
+        }
+
+        .context a {
+            color: #1d7b8c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b3dbe4;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .context a:hover {
+            border-bottom-color: #1d7b8c;
+            color: #0b5263;
+        }
+
+        /* 特点卡片网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin: 2.2rem 0 2.5rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 20px 16px 18px 20px;
+            box-shadow: 0 6px 14px rgba(30, 90, 100, 0.06), 0 2px 4px rgba(0, 40, 50, 0.03);
+            border: 1px solid #e4f0f3;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(35, 105, 115, 0.08);
+            border-color: #b4d9e2;
+        }
+
+        .feature-icon {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: #e2f2f7;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #1c7a8b;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            letter-spacing: 0.01em;
+            color: #153b45;
+            margin-bottom: 6px;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #3e5a63;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        /* 温和的场景与提示混排 */
+        .scene-note {
+            background: #eaf4f8;
+            border-radius: 28px;
+            padding: 28px 24px;
+            margin: 2rem 0 2rem;
+            border-left: 6px solid #4098aa;
+        }
+
+        .scene-note h3 {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: #15424e;
+            margin-bottom: 12px;
+            letter-spacing: 0.02em;
+        }
+
+        .scene-note p {
+            font-size: 0.95rem;
+            color: #214a55;
+            margin-bottom: 0.8rem;
+        }
+
+        .scene-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-summary {
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            padding: 24px 22px;
+            margin: 2rem 0 2rem;
+            border: 1px solid #d3e6ec;
+            box-shadow: 0 4px 8px rgba(35, 85, 95, 0.04);
+        }
+
+        .faq-summary details {
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #c9dce3;
+            padding-bottom: 10px;
+        }
+
+        .faq-summary details:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-summary summary {
+            font-weight: 500;
+            color: #1b5a68;
+            cursor: pointer;
+            padding: 6px 0;
+            font-size: 0.98rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .faq-summary summary::before {
+            content: "▹";
+            color: #3ba0b2;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .faq-summary details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-summary .answer {
+            padding: 6px 0 2px 20px;
+            font-size: 0.9rem;
+            color: #2b515d;
+        }
+
+        /* 温和结尾 */
+        .gentle-end {
+            margin: 2.8rem 0 1rem;
+            padding: 18px 0 6px;
+            border-top: 1px solid #cde1e8;
+            font-size: 0.95rem;
+            color: #2b5a66;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .gentle-end .end-note {
+            opacity: 0.8;
+        }
+
+        .gentle-end .end-link {
+            font-weight: 480;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 560px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .opening {
+                font-size: 1.15rem;
+                padding-left: 12px;
+                border-left-width: 3px;
+            }
+
+            .scene-note {
+                padding: 20px 16px;
+                border-left-width: 4px;
+            }
+
+            .faq-summary {
+                padding: 18px 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 0 14px;
+            }
+
+            .page-wrap {
+                padding: 30px 0 40px;
+            }
+
+            .gentle-end {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+        }
+
+        /* 蓝绿色点缀细节 */
+        ::selection {
+            background: #b1dae6;
+            color: #0e303b;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 开场短句 -->
+    <div class="opening">
+        <em>有些地方，不必喧哗，</em> 也能让人停留。
+    </div>
+
+    <!-- 承接段落：稳定入口与说明 -->
+    <div class="context">
+        <p>
+            在信息流快速翻涌的日常里，一个简单、可靠的入口反而成为稀缺的事。越来越多的人希望找到一个地方，页面安静、内容清晰，没有多余的干扰。正是出于这样的想法，<a href="https://9gaming-jiuyou.com">九游</a> 在很早之前就被设计为一个轻量的起点——不追逐瞬时热点，不堆砌弹窗，只把该呈现的信息以平实的方式排列。
+        </p>
+        <p>
+            每次访问，你看到的都是一样的干净结构：左侧是导航，右侧是内容主体，中间没有悬浮广告或自动播放的媒体。这种稳定感来自对页面语言的克制，也来自对体验节奏的尊重。对许多习惯直接获取信息的人来说，这就像一把用得顺手的钥匙，不需要重新适应。
+        </p>
+    </div>
+
+    <!-- 特点列表（网格卡片） -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⬇</div>
+            <div class="feature-title">轻量载入</div>
+            <div class="feature-desc">页面结构紧凑，不捆绑额外脚本。首次打开、切换页面都很快，即便网络波动也不会出现大面积空白。</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">◈</div>
+            <div class="feature-title">一致的导航</div>
+            <div class="feature-desc">左侧栏目始终保持同样的排序和命名，减少了寻找功能的记忆负担。你不需要反复猜测某个链接去了哪里。</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⊞</div>
+            <div class="feature-title">内容分区清晰</div>
+            <div class="feature-desc">每个板块的标题、摘要、时间线都采用相同的信息层级，从总览到细节只需一次点击，不绕路。</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">◌</div>
+            <div class="feature-title">低视觉噪音</div>
+            <div class="feature-desc">配色以灰蓝、白、浅青绿为主，没有高饱和色块或闪烁元素。长时间阅读也不会感到视觉疲劳。</div>
+        </div>
+    </div>
+
+    <!-- 场景提示：温和的叙述 -->
+    <div class="scene-note">
+        <h3>一个日常的切片</h3>
+        <p>
+            下午三点，你打开浏览器，想去看看某款游戏的版本更新说明，或是找一份几天前看到的攻略存档。<a href="https://9gaming-jiuyou.com">九游</a> 的首页依然是你记忆中的样子：上方是简洁的标识，下方是按时间倒序排列的条目。你扫一眼，就找到了那篇内容。没有推荐流，没有“你可能还喜欢”的模块，你关掉页面时，心里没有留下杂音。
+        </p>
+        <p>
+            这种体验并不新奇，但在如今的网络环境里，它正在变成一种需要特意选择才能获得的东西。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 (两个简短问题) -->
+    <div class="faq-summary">
+        <details>
+            <summary>九游 适合什么样的人使用？</summary>
+            <div class="answer">
+                适合希望快速定位信息、不想被无关内容干扰的浏览者。无论是查找资料、回顾更新日志，还是只是想找一个固定的网络落脚点，都可以顺畅使用。
+            </div>
+        </details>
+        <details>
+            <summary>页面会不会突然改变布局？</summary>
+            <div class="answer">
+                不会。布局和核心交互一直保持稳定。即使有视觉上的微调，也会提前以公告形式说明，不会突然改变导航位置或隐藏常用入口。
+            </div>
+        </details>
+    </div>
+
+    <!-- 温和结尾 + 链接再次出现（自然嵌入） -->
+    <div class="gentle-end">
+        <span class="end-note">如果你还没有去过，或许可以在某个安静的片刻，给自己一个熟悉的坐标。</span>
+        <span class="end-link">
+            <a href="https://9gaming-jiuyou.com" style="color: #1a6f7e; text-decoration: none; border-bottom: 1px solid #a7ceda; font-weight: 450;">九游</a>
+            <span style="opacity: 0.5; margin-left: 6px;">·</span>
+            <span style="opacity: 0.6; font-size: 0.85rem;">一个稳定的页面入口</span>
+        </span>
+    </div>
+
+</div>
+</body>
+</html>
